@@ -1,0 +1,127 @@
+{
+  "info": {
+    "name": "Orders & Inventory",
+    "_postman_id": "4a825bd2-d454-4e99-bf51-bc06c50cf1e0",
+    "description": "Local + Render requests using variables",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Product",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{BASE_URL}}/products",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "products"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"sku\": \"ABC123\", \"name\": \"Widget\", \"price\": 12.5, \"stock\": 10}"
+        }
+      }
+    },
+    {
+      "name": "List Products",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{BASE_URL}}/products",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "products"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Product by ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{BASE_URL}}/products/1",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "products",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{BASE_URL}}/orders",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "orders"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"product_id\": 1, \"quantity\": 2}"
+        }
+      }
+    },
+    {
+      "name": "Webhook Payment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Signature",
+            "value": "<computed>"
+          }
+        ],
+        "url": {
+          "raw": "{{BASE_URL}}/webhooks/payment",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "webhooks",
+            "payment"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"order_id\": 1, \"event\": \"payment.succeeded\"}"
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "http://localhost:8000"
+    }
+  ]
+}
